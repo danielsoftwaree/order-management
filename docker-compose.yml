@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      - POSTGRES_DB=devit
+      - POSTGRES_USER=devit_user
+      - POSTGRES_PASSWORD=devit_pass_8x9k2m4p
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:

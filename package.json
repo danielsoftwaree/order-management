@@ -1,13 +1,14 @@
 {
-  "name": "order-management",
-  "version": "0.0.1",
+  "name": "order-management-monorepo",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev:frontend": "pnpm --filter frontend dev",
-    "dev:backend": "pnpm --filter backend dev",
-    "build": "pnpm --filter ./... build"
+    "install:all": "npm install --workspaces",
+    "build:all": "npm run build --workspaces",
+    "start": "docker-compose up --build"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
-  }
+    "typescript": "^5.8.2"
+  },
+  "packageManager": "pnpm@10.7.1"
 }
