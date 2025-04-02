@@ -1,0 +1,13 @@
+{
+  "name": "order-management",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:backend": "pnpm --filter backend dev",
+    "build": "pnpm --filter ./... build"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
