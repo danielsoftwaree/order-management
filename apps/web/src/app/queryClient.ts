@@ -1,8 +1,6 @@
-import { QueryClient } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-import { z } from 'zod';
-
-export const ApiErrorDataSchema = z.array(z.string());
+import { ApiErrorData } from '@/shared/api/api.types'
+import { QueryClient } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 
 export const queryClient = new QueryClient({
     defaultOptions: {
@@ -12,10 +10,10 @@ export const queryClient = new QueryClient({
             staleTime: 1000 * 60,
         },
     },
-});
+})
 
 declare module '@tanstack/react-query' {
     interface Register {
-        defaultError: AxiosError<z.infer<typeof ApiErrorDataSchema>>;
+        defaultError: AxiosError<ApiErrorData>
     }
 }
