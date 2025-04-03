@@ -29,6 +29,31 @@ export class ProductService {
         }
     }
 
+    async getProductById(id: string) {
+        const product = await this.prisma.product.findUnique({
+            where: { id },
+        });
+
+        if (!product) {
+            throw new ApiError(ErrorCode.PRODUCT_NOT_FOUND);
+        }
+
+        return product;
+    }
+
+    async decreaseProductStock(id: string, quantity: number) {
+        const product = await this.getProductById(id);
+
+        if (product.stock === 0 || product.stock < quantity) {
+            throw new ApiError(ErrorCode.PRODUCT_OUT_OF_STOCK);
+        }
+
+        await this.prisma.product.update({
+            where: { id },
+            data: { stock: { decrement: quantity } },
+        });
+    }
+
     async createProduct(product: ProductDto) {
         try {
             await this.findProductByNameAndThrow(product.name);
@@ -42,6 +67,13 @@ export class ProductService {
                 message: error.message
             });
         }
+    }
+
+    async updateProduct(id: string, product: ProductDto) {
+        await this.prisma.product.update({
+            where: { id },
+            data: product,
+        });
     }
 
     async findProductByNameAndThrow(name: string) {
