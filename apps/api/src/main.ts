@@ -7,6 +7,10 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
 
+    app.enableCors({
+        origin: '*'
+    });
+
     app.useGlobalFilters(new ApiExceptionFilter());
 
     app.useGlobalInterceptors(new TransformInterceptor());

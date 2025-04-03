@@ -21,6 +21,6 @@ export class OrderController {
 
     @Get("/:id")
     async getOrderById(@Param("id") userId: string): Promise<OrderDto[]> {
-        return this.orderService.getOrderById(userId);
+        return this.orderService.getOrderByUserId(userId);
     }
 }

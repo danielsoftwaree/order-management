@@ -66,10 +66,13 @@ export class OrderService {
         return createdOrder;
     }
 
-    async getOrderById(userId: string): Promise<OrderDto[]> {
+    async getOrderByUserId(userId: string): Promise<OrderDto[]> {
         const orders = await this.prisma.order.findMany({
             where: {
                 userId,
+            },
+            orderBy: {
+                createdAt: 'desc',
             },
         });
 
