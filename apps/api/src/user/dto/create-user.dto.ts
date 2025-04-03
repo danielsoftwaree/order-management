@@ -9,7 +9,7 @@ export class CreateUserDto {
     name: string;
 
     @IsEmail()
-    email: string; // TODO: need to validate email
+    email: string;
 
     @IsString()
     @MinLength(6)
