@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
+import { ApiError } from '../../common/errors/api-error';
+import { ErrorCode } from '../../common/errors/error-codes';
 import { ProductDto } from '../dto/product.dto';
-import { ApiError } from 'src/common/errors/api-error';
-import { ErrorCode } from 'src/common/errors/error-codes';
 
 @Injectable()
 export class ProductService {
