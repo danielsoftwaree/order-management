@@ -10,7 +10,7 @@ export class UserController {
         return {
             name: user.name,
             email: user.email,
-            balance: user.balance
+            balance: user.balance,
         };
     }
 }

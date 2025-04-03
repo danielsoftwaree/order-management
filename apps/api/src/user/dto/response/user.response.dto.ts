@@ -1,14 +1,19 @@
-import { Decimal } from '@prisma/client/runtime/library';
-import { IsString, IsEmail, IsNumber, IsDecimal } from 'class-validator';
+import { IsString } from "class-validator";
+
+import { IsEmail } from "class-validator";
+
+import { IsNotEmpty } from "class-validator";
 
 export class UserResponseDto {
+    @IsNotEmpty()
     @IsString()
     name: string;
 
+    @IsNotEmpty()
     @IsEmail()
     email: string;
 
-    @IsDecimal()
-    balance: Decimal;
+    @IsNotEmpty()
+    balance: number;
 }
 
