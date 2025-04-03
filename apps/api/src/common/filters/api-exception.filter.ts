@@ -65,7 +65,6 @@ export class ApiExceptionFilter implements ExceptionFilter {
                 },
             };
 
-            // Логирование непредвиденных ошибок
             this.logger.error(
                 `Unexpected error: ${exception instanceof Error ? exception.message : 'Unknown error'}`,
                 exception instanceof Error ? exception.stack : undefined,
