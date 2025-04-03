@@ -11,6 +11,30 @@ services:
       - db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - backend
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://devit_user:devit_pass_8x9k2m4p@postgres:5432/devit
+      - NODE_ENV=development
+      - JWT_SECRET=your_jwt_secret_key
+    depends_on:
+      - postgres
+    networks:
+      - backend
+    volumes:
+      - ./apps/api:/app
+      - /app/node_modules
+
+networks:
+  backend:
+    driver: bridge
 
 volumes:
   db_data:
