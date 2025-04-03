@@ -29,6 +29,7 @@ export class AuthMiddleware implements NestMiddleware {
                 return;
             }
 
+            // for CurrentUser decorator
             req['user'] = {
                 id: user.id,
                 email: user.email,
