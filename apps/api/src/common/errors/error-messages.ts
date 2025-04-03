@@ -20,6 +20,7 @@ export const ErrorMessages: Record<ErrorCode, string> = {
     [ErrorCode.PRODUCT_NOT_FOUND]: 'Product not found',
     [ErrorCode.PRODUCT_ALREADY_EXISTS]: 'Product with this name already exists',
     [ErrorCode.INSUFFICIENT_STOCK]: 'Insufficient stock',
+    [ErrorCode.PRODUCT_OUT_OF_STOCK]: 'Product out of stock',
 
     // Order errors
     [ErrorCode.ORDER_NOT_FOUND]: 'Order not found',

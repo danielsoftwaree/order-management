@@ -22,6 +22,7 @@ const HTTP_STATUS_MAP: Record<ErrorCode, HttpStatus> = {
     [ErrorCode.PRODUCT_NOT_FOUND]: HttpStatus.NOT_FOUND,
     [ErrorCode.PRODUCT_ALREADY_EXISTS]: HttpStatus.CONFLICT,
     [ErrorCode.INSUFFICIENT_STOCK]: HttpStatus.CONFLICT,
+    [ErrorCode.PRODUCT_OUT_OF_STOCK]: HttpStatus.CONFLICT,
 
     // Order errors
     [ErrorCode.ORDER_NOT_FOUND]: HttpStatus.NOT_FOUND,
