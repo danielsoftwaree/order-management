@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { ProductService } from './services/product.service';
 import { ProductDto } from './dto/product.dto';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('products')
+@UseGuards(JwtAuthGuard)
 export class ProductController {
     constructor(private readonly productService: ProductService) { }
 
@@ -11,7 +13,7 @@ export class ProductController {
         return this.productService.getProducts();
     }
 
-    @Post()
+    @Post('/create')
     async createProduct(@Body() product: ProductDto) {
         return this.productService.createProduct(product);
     }

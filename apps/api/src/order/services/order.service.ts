@@ -65,4 +65,18 @@ export class OrderService {
 
         return createdOrder;
     }
+
+    async getOrderById(userId: string): Promise<OrderDto[]> {
+        const orders = await this.prisma.order.findMany({
+            where: {
+                userId,
+            },
+        });
+
+        if (!orders) {
+            throw new ApiError(ErrorCode.ORDER_NOT_FOUND);
+        }
+
+        return orders;
+    }
 }

@@ -15,6 +15,13 @@ export class UserService {
     const user = await this.prisma.user.findUnique({
       where: userWhereUniqueInput,
     });
+    return user;
+  }
+
+  async findUser(userWhereUniqueInput: Prisma.UserWhereUniqueInput): Promise<User> {
+    const user = await this.prisma.user.findUnique({
+      where: userWhereUniqueInput,
+    });
 
     if (!user) {
       throw new ApiError(ErrorCode.USER_NOT_FOUND);

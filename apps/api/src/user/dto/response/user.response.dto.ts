@@ -7,6 +7,10 @@ import { IsNotEmpty } from "class-validator";
 export class UserResponseDto {
     @IsNotEmpty()
     @IsString()
+    id: string;
+
+    @IsNotEmpty()
+    @IsString()
     name: string;
 
     @IsNotEmpty()
