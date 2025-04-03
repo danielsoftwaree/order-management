@@ -10,22 +10,28 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5434:5432"
     networks:
       - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U devit_user -d devit"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   api:
     build:
       context: .
       dockerfile: apps/api/Dockerfile
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       - DATABASE_URL=postgresql://devit_user:devit_pass_8x9k2m4p@postgres:5432/devit
-      - NODE_ENV=development
-      - JWT_SECRET=your_jwt_secret_key
+      - NODE_ENV=production
+      - JWT_SECRET=secret123
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - backend
     volumes:

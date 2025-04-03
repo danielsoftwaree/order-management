@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "install:all": "npm install --workspaces",
-    "build:all": "npm run build --workspaces",
+    "install:all": "pnpm install -r",
+    "build:all": "pnpm -r run build",
     "start": "docker-compose up --build"
   },
   "devDependencies": {
     "typescript": "^5.8.2"
-  },
-  "packageManager": "pnpm@10.7.1"
+  }
 }
