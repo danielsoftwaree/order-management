@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-export const api = axios.create({ baseURL: __API__ })
+const API_URL = import.meta.env.VITE_API_URL
+
+export const api = axios.create({ baseURL: API_URL })
 
 export function attachAuthInterceptor(getAuthToken: () => string | null) {
     api.interceptors.request.use(
