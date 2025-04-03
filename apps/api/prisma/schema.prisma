@@ -18,14 +18,14 @@ model User {
   name     String
   email    String  @unique
   password String
-  balance  Decimal @default(100)
+  balance  Float @default(100)
   orders   Order[]
 }
 
 model Product {
   id     String  @id @default(uuid())
   name   String
-  price  Decimal
+  price  Float
   stock  Int
   orders Order[]
 }
@@ -37,7 +37,7 @@ model Order {
   product    Product  @relation(fields: [productId], references: [id])
   productId  String
   quantity   Int
-  totalPrice Decimal
+  totalPrice Float
   createdAt  DateTime @default(now())
 }
 
