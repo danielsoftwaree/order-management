@@ -1,98 +1,174 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Order Management API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Backend REST API for the order management system, built with NestJS and Prisma.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Technologies
 
-## Description
+- **Framework**: NestJS
+- **Programming Language**: TypeScript
+- **Database**: PostgreSQL
+- **ORM**: Prisma
+- **Authentication**: JWT (JSON Web Tokens)
+- **Input Validation**: class-validator
+- **Containerization**: Docker
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Project Structure
 
-## Project setup
-
-```bash
-$ pnpm install
+```
+api/
+│
+├── src/                      # Application source code
+│   ├── auth/                 # Authentication module
+│   │   ├── controllers/      # Auth endpoints
+│   │   ├── services/         # Auth business logic
+│   │   ├── strategies/       # JWT strategies
+│   │   ├── guards/           # Auth guards
+│   │   └── middlewares/      # Auth middlewares
+│   │
+│   ├── user/                 # User module
+│   │   ├── controllers/      # User endpoints
+│   │   ├── services/         # User business logic
+│   │   └── dto/              # Data Transfer Objects
+│   │
+│   ├── product/              # Product module
+│   │   ├── controllers/      # Product endpoints
+│   │   ├── services/         # Product business logic
+│   │   └── dto/              # Data Transfer Objects
+│   │
+│   ├── order/                # Order module
+│   │   ├── controllers/      # Order endpoints
+│   │   ├── services/         # Order business logic
+│   │   └── dto/              # Data Transfer Objects
+│   │
+│   ├── prisma/               # Database connection
+│   │   └── schema.prisma     # Database schema
+│   │
+│   ├── common/               # Shared resources
+│   │   ├── filters/          # Exception filters
+│   │   ├── interceptors/     # Response interceptors
+│   │   └── guards/           # API rate limiting
+│   │
+│   ├── app.module.ts         # Root module
+│   └── main.ts               # Entry point
+│
+├── prisma/                   # Prisma configuration
+│   ├── migrations/           # Database migrations
+│   └── schema.prisma         # Database schema
+│
+├── test/                     # End-to-end tests
+├── Dockerfile                # Docker build configuration
+└── package.json              # Project dependencies and scripts
 ```
 
-## Compile and run the project
+## Local Setup
 
-```bash
-# development
-$ pnpm run start
+### Prerequisites
 
-# watch mode
-$ pnpm run start:dev
+- Node.js (v18+)
+- PostgreSQL
+- npm or pnpm
 
-# production mode
-$ pnpm run start:prod
+### Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```
+DATABASE_URL="postgresql://username:password@localhost:5432/order_management"
+JWT_SECRET="your-jwt-secret"
+PORT=3000
 ```
 
-## Run tests
+### Installing Dependencies
 
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+pnpm install
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Database Setup
 
 ```bash
-$ pnpm install -g mau
-$ mau deploy
+# Create database migrations
+pnpm migrate
+
+# Apply migrations to database
+pnpm migrate:prod
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Development Mode
 
-## Resources
+```bash
+pnpm start:dev
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+The API will be available at: http://localhost:3000
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### Production Build
 
-## Support
+```bash
+pnpm build
+pnpm start:prod
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Docker
 
-## Stay in touch
+The project can be run in a Docker container:
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+# Build the image
+docker build -t order-management-api .
 
-## License
+# Run the container
+docker run -p 3000:3000 --env-file .env order-management-api
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## API Endpoints
+
+### Authentication
+
+- `POST /auth/register` - Register a new user
+- `POST /auth/login` - Authenticate user and get token
+
+### Users
+
+- `GET /users/me` - Get current user profile
+- `GET /users/:id` - Get user by ID
+- `PATCH /users/:id` - Update user details
+
+### Products
+
+- `GET /products` - Get list of products
+- `GET /products/:id` - Get product by ID
+- `POST /products` - Create a new product
+- `PATCH /products/:id` - Update product details
+- `DELETE /products/:id` - Delete a product
+
+### Orders
+
+- `GET /orders` - Get list of orders
+- `GET /orders/:id` - Get order by ID
+- `POST /orders` - Create a new order
+- `PATCH /orders/:id` - Update order status
+
+## Security Features
+
+- JWT-based authentication
+- Password hashing with bcrypt
+- API rate limiting
+- Input validation and sanitization
+- CORS protection
+
+## Database Schema
+
+The application uses the following data models:
+
+- **User** - Stores user information, account balance, and authentication details
+- **Product** - Contains product details such as name, price, and stock level
+- **Order** - Represents a purchase of products by users
+
+## Development Guidelines
+
+- Use DTOs for data validation and transformation
+- Follow NestJS module organization
+- Write unit tests for services
+- Implement proper error handling
+- Use transactions for database operations that affect multiple tables
