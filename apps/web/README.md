@@ -1,54 +1,152 @@
-# React + TypeScript + Vite
+# Order Management Web Interface
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern web application for order management with an intuitive interface and rich functionality.
 
-Currently, two official plugins are available:
+![Web Interface Preview](../../images/image.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies
 
-## Expanding the ESLint configuration
+-   **Framework**: React 19 + Vite
+-   **Programming Language**: TypeScript
+-   **Styling**: Mantine UI + Tailwind CSS
+-   **Routing**: React Router v7
+-   **State Management**: Zustand, Redux Toolkit
+-   **API Integration**: React Query, Axios
+-   **Validation**: Zod
+-   **Containerization**: Docker
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Project Structure
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+web/
+│
+├── src/                      # Application source code
+│   ├── app/                  # Application core
+│   │   ├── providers/        # Providers (Redux, React Query)
+│   │   ├── routes/           # Routes configuration
+│   │   └── styles/           # Global styles
+│   │
+│   ├── pages/                # Page components
+│   │   ├── auth/             # Authentication page
+│   │   └── orders/           # Orders page
+│   │
+│   ├── features/             # Business functionality
+│   │   ├── auth/             # Authentication (login/registration)
+│   │   ├── create-order/     # Order creation
+│   │   ├── create-product/   # Product addition
+│   │   └── order-list/       # Order list
+│   │
+│   ├── entities/             # Business entities
+│   │   └── user/             # User entity
+│   │
+│   ├── shared/               # Reusable code
+│   │   ├── api/              # API configuration
+│   │   └── tokenStorage/     # Auth token management
+│   │
+│   └── main.tsx              # Entry point
+│
+├── public/                   # Public static files
+├── .vscode/                  # VS Code settings
+├── Dockerfile                # Docker image build instructions
+├── tsconfig.json             # TypeScript configuration
+└── package.json              # Project dependencies and scripts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Local Setup
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Requirements
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+-   Node.js (v18+)
+-   pnpm
+
+### Installing Dependencies
+
+```bash
+pnpm install
 ```
+
+### Development Mode
+
+```bash
+pnpm dev
+```
+
+The application will be available at: http://localhost:5173
+
+### Production Build
+
+```bash
+pnpm build
+```
+
+Built files will be placed in the `dist/` directory.
+
+## Environment Variables
+
+The project uses the following environment variables:
+
+-   `VITE_BASE_URL` — URL for API requests (default is "http://localhost:5000")
+
+## Docker
+
+The project can be run in a Docker container:
+
+```bash
+# Build the image
+docker build -t order-management-web .
+
+# Run the container
+docker run -p 8080:80 order-management-web
+```
+
+## Key Features
+
+The web interface provides the following functionality:
+
+-   **User Authentication**:
+
+    -   Login
+    -   New user registration
+
+-   **Order Management**:
+
+    -   View order list
+    -   Create new orders
+    -   Filtering and sorting
+
+-   **Product Management**:
+
+    -   Add new products
+    -   View catalog
+
+-   **User Profile**:
+    -   User information
+    -   Account balance
+    -   Transaction history
+
+## Application Architecture
+
+The application is built according to Feature-Sliced Design (FSD) principles, which provides:
+
+-   Modularity and feature isolation
+-   Ease of adding new features
+-   Component reusability
+-   Better testability
+
+## Development Guidelines
+
+-   Follow the FSD architecture when adding new functionality
+-   Use React Query for API requests
+-   Use @mantine/form library for forms
+-   Use ready-made components from Mantine UI for styling
+-   Follow TypeScript rules, defining types for all entities
+
+## API Integration
+
+The frontend interacts with the API server to perform the following operations:
+
+-   User authentication
+-   Retrieving order lists
+-   Creating new orders
+-   Managing products
+-   Getting statistics
