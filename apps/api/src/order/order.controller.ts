@@ -5,6 +5,7 @@ import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { User } from '@prisma/client';
 import { OrderDto } from './dto/order.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { UserThrottlerGuard } from 'src/common/guards/user-throttler/user-throttler.guard';
 
 @Controller('order')
 @UseGuards(JwtAuthGuard)

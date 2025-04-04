@@ -8,12 +8,14 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AuthMiddleware } from './auth/middlewares/auth.middleware';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { UserThrottlerModule } from './common/guards/user-throttler/user-throttler.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    UserThrottlerModule,
     ProductModule,
     UserModule,
     OrderModule,

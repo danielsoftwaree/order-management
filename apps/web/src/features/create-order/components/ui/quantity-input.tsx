@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { NumberInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import { FormValues } from '../../hooks/use-create-order-form'
+import { FormValues } from '../create-order-form'
 
 interface QuantityInputProps {
     form: ReturnType<typeof useForm<FormValues>>

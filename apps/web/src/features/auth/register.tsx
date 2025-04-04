@@ -6,7 +6,8 @@ import { useRegister } from './auth.api'
 
 export function RegisterAuth() {
     const navigate = useNavigate()
-    const registerMutation = useRegister()
+    const { mutateAsync: register, isPending: isRegisterPending } =
+        useRegister()
 
     const form = useForm({
         initialValues: {
@@ -17,13 +18,13 @@ export function RegisterAuth() {
         validate: {
             name: (value) =>
                 value.length < 2
-                    ? 'Имя должно содержать не менее 2 символов'
+                    ? 'Name must contain at least 2 characters'
                     : null,
             email: (value) =>
-                /^\S+@\S+$/.test(value) ? null : 'Некорректный email',
+                /^\S+@\S+$/.test(value) ? null : 'Invalid email',
             password: (value) =>
                 value.length < 6
-                    ? 'Пароль должен содержать не менее 6 символов'
+                    ? 'Password must contain at least 6 characters'
                     : null,
         },
     })
@@ -33,29 +34,51 @@ export function RegisterAuth() {
         email: string
         password: string
     }) => {
-        try {
-            await registerMutation.mutateAsync(values)
-            notifications.show({
-                title: 'Успешная регистрация',
-                message: 'Вы успешно зарегистрировались в системе',
-                color: 'green',
-            })
-            navigate('/orders')
-        } catch (error) {
-            notifications.show({
-                title: 'Ошибка',
-                message: 'Произошла ошибка при регистрации',
-                color: 'red',
-            })
-        }
+        register(values, {
+            onSuccess: () => {
+                notifications.show({
+                    title: 'Registration Successful',
+                    message: 'You have successfully registered in the system',
+                    color: 'green',
+                })
+                navigate('/orders')
+            },
+            onError: (error: any) => {
+                const errorMessage =
+                    error.response?.data?.error.message ||
+                    'An error occurred during registration'
+
+                notifications.show({
+                    title: 'Error',
+                    message: errorMessage,
+                    color: 'red',
+                })
+            },
+        })
+        // try {
+        //     await registerMutation.mutateAsync(values)
+        //     notifications.show({
+        //         title: 'Registration Successful',
+        //         message: 'You have successfully registered in the system',
+        //         color: 'green',
+        //     })
+        //     navigate('/orders')
+        // } catch (error) {
+        //     const errorMessage = error.response.data.
+        //     notifications.show({
+        //         title: 'Error',
+        //         message: 'An error occurred during registration',
+        //         color: 'red',
+        //     })
+        // }
     }
 
     return (
         <Box>
             <form onSubmit={form.onSubmit(handleSubmit)}>
                 <TextInput
-                    label="Имя"
-                    placeholder="Ваше имя"
+                    label="Name"
+                    placeholder="Your name"
                     required
                     {...form.getInputProps('name')}
                     mb="md"
@@ -68,20 +91,16 @@ export function RegisterAuth() {
                     mb="md"
                 />
                 <PasswordInput
-                    label="Пароль"
-                    placeholder="Ваш пароль"
+                    label="Password"
+                    placeholder="Your password"
                     required
                     {...form.getInputProps('password')}
                     mb="xl"
                 />
 
                 <Group justify="center">
-                    <Button
-                        type="submit"
-                        loading={registerMutation.isPending}
-                        fullWidth
-                    >
-                        Зарегистрироваться
+                    <Button type="submit" loading={isRegisterPending} fullWidth>
+                        Register
                     </Button>
                 </Group>
             </form>

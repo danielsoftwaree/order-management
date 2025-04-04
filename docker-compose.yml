@@ -24,7 +24,7 @@ services:
       context: .
       dockerfile: apps/api/Dockerfile
     ports:
-      - "3001:3000"
+      - "5000:3000"
     environment:
       - DATABASE_URL=postgresql://devit_user:devit_pass_8x9k2m4p@postgres:5432/devit
       - NODE_ENV=production
@@ -36,6 +36,24 @@ services:
       - backend
     volumes:
       - ./apps/api:/app
+      - /app/node_modules
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        VITE_API_URL: http://localhost:5000
+    ports:
+      - "8080:80"
+    environment:
+      - VITE_BASE_URL=${VITE_BASE_URL:-http://localhost:5000}
+    depends_on:
+      - api
+    networks:
+      - backend
+    volumes:
+      - ./apps/web:/app
       - /app/node_modules
 
 networks:

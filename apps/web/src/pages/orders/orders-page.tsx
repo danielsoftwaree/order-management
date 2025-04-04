@@ -14,6 +14,7 @@ import {
 } from '@mantine/core'
 import { OrdersList } from '@/features/order-list'
 import { CreateOrderForm } from '@/features/create-order'
+import { CreateProductForm } from '@/features/create-product'
 import { useLogout } from '@/features/auth'
 import { useNavigate } from 'react-router-dom'
 import { useGetCurrentUser } from '@/entities/user/user.api'
@@ -64,6 +65,7 @@ export function OrdersPage() {
                     <Tabs.List grow>
                         <Tabs.Tab value="orders">My Orders</Tabs.Tab>
                         <Tabs.Tab value="create">Create Order</Tabs.Tab>
+                        <Tabs.Tab value="products">Add Product</Tabs.Tab>
                     </Tabs.List>
 
                     <Tabs.Panel value="orders" pt="xl">
@@ -73,6 +75,12 @@ export function OrdersPage() {
                     <Tabs.Panel value="create" pt="xl">
                         <CreateOrderForm
                             onSuccess={() => setActiveTab('orders')}
+                        />
+                    </Tabs.Panel>
+
+                    <Tabs.Panel value="products" pt="xl">
+                        <CreateProductForm
+                            onSuccess={() => setActiveTab('create')}
                         />
                     </Tabs.Panel>
                 </Tabs>

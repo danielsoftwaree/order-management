@@ -5,6 +5,7 @@ export const ErrorMessages: Record<ErrorCode, string> = {
     [ErrorCode.BAD_REQUEST]: 'Invalid request',
     [ErrorCode.VALIDATION_ERROR]: 'Validation error',
     [ErrorCode.RESOURCE_NOT_FOUND]: 'Resource not found',
+    [ErrorCode.TOO_MANY_REQUESTS]: 'Too many requests. Please wait a moment.',
 
     // Authentication errors
     [ErrorCode.UNAUTHORIZED]: 'Authentication required',

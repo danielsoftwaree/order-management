@@ -1,0 +1,1 @@
+export { CreateProductForm } from './components/create-product-form' 

@@ -7,6 +7,7 @@ const HTTP_STATUS_MAP: Record<ErrorCode, HttpStatus> = {
     [ErrorCode.BAD_REQUEST]: HttpStatus.BAD_REQUEST,
     [ErrorCode.VALIDATION_ERROR]: HttpStatus.UNPROCESSABLE_ENTITY,
     [ErrorCode.RESOURCE_NOT_FOUND]: HttpStatus.NOT_FOUND,
+    [ErrorCode.TOO_MANY_REQUESTS]: HttpStatus.TOO_MANY_REQUESTS,
 
     // Authentication errors
     [ErrorCode.UNAUTHORIZED]: HttpStatus.UNAUTHORIZED,
