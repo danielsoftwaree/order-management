@@ -10,7 +10,7 @@ Modern web application for order management with an intuitive interface and rich
 -   **Programming Language**: TypeScript
 -   **Styling**: Mantine UI + Tailwind CSS
 -   **Routing**: React Router v7
--   **State Management**: Zustand, Redux Toolkit
+-   **State Management**: Zustand
 -   **API Integration**: React Query, Axios
 -   **Validation**: Zod
 -   **Containerization**: Docker
