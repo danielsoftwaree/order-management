@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Container, Title, Tabs, Paper } from '@mantine/core'
+import { Container, Title, Tabs, Paper, Text, Space } from '@mantine/core'
 import { LoginAuth } from '@/features/auth/login'
 import { RegisterAuth } from '@/features/auth/register'
 
@@ -12,7 +12,6 @@ export function AuthPage() {
                 <Title order={2} ta="center" mt="md" mb={30}>
                     Order Management System
                 </Title>
-
                 <Tabs value={activeTab} onChange={setActiveTab}>
                     <Tabs.List grow>
                         <Tabs.Tab value="login">Login</Tabs.Tab>
@@ -28,6 +27,10 @@ export function AuthPage() {
                     </Tabs.Panel>
                 </Tabs>
             </Paper>
+            <Space h="lg" />
+            <Text size="md" ta="center" mb="md" c="dimmed">
+                Registration is very simple and takes only 10 seconds! 😊
+            </Text>
         </Container>
     )
 }
